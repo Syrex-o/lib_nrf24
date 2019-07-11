@@ -54,6 +54,6 @@ def loop():
             loop()
     else:
     	# writing callback to fhem, if no callback received
-        os.system('perl /opt/fhem/fhem.pl 7072 "set '+sys.argv[4]+' callbackState false"')
+        # os.system('perl /opt/fhem/fhem.pl 7072 "set '+sys.argv[4]+' callbackState false"')
         sys.exit()
 loop()
