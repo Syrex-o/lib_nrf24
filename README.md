@@ -16,7 +16,7 @@ Python2/3 library for NRF24L01+ Transceivers
 7. sudo python3 setup.py install
 8. mkdir /home/pi/NRF24L01
 9. sudo apt-get install git -y
-10. cd ./NRF24L01
+10. cd /home/pi/NRF24L01
 11. git clone https://github.com/Syrex-o/lib_nrf24
 12. cd ./lib_nrf24/
 13. cp lib_nrf24.py /home/pi/NRF24L01/
