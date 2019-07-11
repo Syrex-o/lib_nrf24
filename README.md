@@ -24,5 +24,5 @@ Python2/3 library for NRF24L01+ Transceivers
 
 
 ## Autostart receiver.py
-sudo nano /etc/rc.local
-python3 /home/pi/NRF24L01/receive.py &
+1. sudo nano /etc/rc.local
+2. python3 /home/pi/NRF24L01/receive.py &
