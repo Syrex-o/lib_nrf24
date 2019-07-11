@@ -3,6 +3,7 @@ from lib_nrf24 import NRF24
 import time
 import spidev
 from threading import Timer
+import sys
 
 # Define Board GPIOs
 GPIO.setmode(GPIO.BCM)
@@ -17,7 +18,7 @@ radio.begin(0, 17)
 radio.setRetries(15,15)
 
 radio.setPayloadSize(8)
-radio.setChannel(0x60)
+radio.setChannel(124)
 radio.setDataRate(NRF24.BR_250KBPS)
 radio.setPALevel(NRF24.PA_MAX)
 
@@ -38,10 +39,11 @@ def send(): radio.write(message)
 def loop():
     global tries
     tries += 1
+    print(tries)
     if tries <= 6:
-    	send()
+        send()
         if radio.isAckPayloadAvailable():
-        	returnedPL = []
+            returnedPL = []
             radio.read(returnedPL, radio.getDynamicPayloadSize())
             print("received message: {}".format(returnedPL))
             # fhem command evaluation
@@ -53,7 +55,7 @@ def loop():
             time.sleep(1)
             loop()
     else:
-    	# writing callback to fhem, if no callback received
+        # writing callback to fhem, if no callback received
         # os.system('perl /opt/fhem/fhem.pl 7072 "set '+sys.argv[4]+' callbackState false"')
         sys.exit()
 loop()
