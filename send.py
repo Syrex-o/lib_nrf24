@@ -8,12 +8,6 @@ from threading import Timer
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-# GPIO Relais Board Pins
-PINS = [2,3,4,5,6,7]
-
-# initializing GPIOS to HIGH
-for i in PINS: GPIO.setup(i, GPIO.OUT, initial=GPIO.HIGH)
-
 pipes = [[0xe7, 0xe7, 0xe7, 0xe7, 0xe7], [0xc2, 0xc2, 0xc2, 0xc2, 0xc2]]
 
 radio = NRF24(GPIO, spidev.SpiDev())
