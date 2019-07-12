@@ -1,4 +1,4 @@
-mport RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24
 import time
 import spidev
