@@ -70,13 +70,6 @@ def loop():
             # sys.exit()
             role = "TX"
             loop()
-            receivedMessage = []
-            radio.read(receivedMessage, radio.getDynamicPayloadSize())
-            # print("received message: {}".format(receivedMessage))
-            receivedCounter += 1
-            # sys.exit()
-            role = "TX"
-            loop()
     else:
         percentage = str((receivedCounter / (maxTries/2)) * 100) + "%"
         print("Result: {}/{} ({})".format(receivedCounter, (maxTries / 2), percentage))
