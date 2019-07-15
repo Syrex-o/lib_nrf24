@@ -23,6 +23,6 @@ Python2/3 library for NRF24L01+ Transceivers
 14. sudo apt-get install python3-rpi.gpio -y
 
 
-## Autostart receiver.py
+## Autostart Receiver
 1. sudo nano /etc/rc.local
 2. python3 /home/pi/NRF24L01/receiveSwitch.py &
