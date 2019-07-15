@@ -4,6 +4,7 @@ import time
 import spidev
 from threading import Timer
 import sys
+import os
 
 # Define Board GPIOs
 GPIO.setmode(GPIO.BCM)
