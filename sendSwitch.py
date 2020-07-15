@@ -76,5 +76,6 @@ def loop():
             evaluate(receivedMessage)
     else:
         os.system('perl /opt/fhem/fhem.pl 7072 "set '+sys.argv[4]+' callbackState false"')
+        os.system('perl /opt/fhem/fhem.pl 7072 "set '+sys.argv[4]+' lastError noReply"')
         sys.exit()
 loop()
