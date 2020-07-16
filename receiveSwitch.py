@@ -47,8 +47,6 @@ def pinOff(pin):
 	isTimerActive = False
 
 while True:
-	global PINS
-	
 	while not radio.available():
 		time.sleep(1/100)
 	receivedMessage = []
