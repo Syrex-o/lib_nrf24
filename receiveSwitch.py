@@ -47,6 +47,8 @@ def pinOff(pin):
 	isTimerActive = False
 
 while True:
+	global PINS
+	
 	while not radio.available():
 		time.sleep(1/100)
 	receivedMessage = []
@@ -65,7 +67,7 @@ while True:
 		if not GPIO.input(pin):
 			GPIO.output(pin, GPIO.HIGH)
 	# setting correct GPIO
-	if len(arr) > 0:
+	if len(arr) > 0 && int(arr[0]) in PINS:
 		if arr[1] == '1':
 			GPIO.output(int(arr[0]), GPIO.LOW)
 			secs = int("".join(arr)[2:])
