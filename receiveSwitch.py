@@ -67,7 +67,7 @@ while True:
 		if not GPIO.input(pin):
 			GPIO.output(pin, GPIO.HIGH)
 	# setting correct GPIO
-	if len(arr) > 0 && int(arr[0]) in PINS:
+	if len(arr) > 0 and int(arr[0]) in PINS:
 		if arr[1] == '1':
 			GPIO.output(int(arr[0]), GPIO.LOW)
 			secs = int("".join(arr)[2:])
