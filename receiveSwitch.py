@@ -14,7 +14,7 @@ PINS = [2,3,4,5,6,7]
 
 # initializing GPIOS to HIGH
 for i in PINS:
-    GPIO.setup(i, GPIO.OUT, initial=GPIO.HIGH)
+	GPIO.setup(i, GPIO.OUT, initial=GPIO.HIGH)
 
 pipes = [[0xe7, 0xe7, 0xe7, 0xe7, 0xe7], [0xc2, 0xc2, 0xc2, 0xc2, 0xc2]]
 
@@ -42,38 +42,39 @@ radio.startListening()
 isTimerActive = False
 
 def pinOff(pin):
-    global isTimerActive
-    GPIO.output(pin, GPIO.HIGH)
-    isTimerActive = False
+	global isTimerActive
+	GPIO.output(pin, GPIO.HIGH)
+	isTimerActive = False
 
 while True:
-    while not radio.available():
-        time.sleep(1/100)
-    receivedMessage = []
-    radio.read(receivedMessage, radio.getDynamicPayloadSize())
-    radio.stopListening()
-    radio.write(receivedMessage)
-    radio.startListening()
-    # translating message
-    arr = []
-    for n in receivedMessage:
-        # Decode into standard unicode set
-        if (n >= 32 and n <= 126):
-            arr.append(chr(n))
-    # setting pins off
-    for pin in PINS:
-        if not GPIO.input(pin):
-            GPIO.output(pin, GPIO.HIGH)
-    # setting correct GPIO
-    if arr[1] == '1':
-        GPIO.output(int(arr[0]), GPIO.LOW)
-        secs = int("".join(arr)[2:])
-        # timer
-        if isTimerActive:
-            t.cancel()
-            isTimerActive = False
-        t = Timer(secs, pinOff, [int(arr[0])])
-        t.start()
-        isTimerActive = True
-    else:
-        GPIO.output(int(arr[0]), GPIO.HIGH)
+	while not radio.available():
+		time.sleep(1/100)
+	receivedMessage = []
+	radio.read(receivedMessage, radio.getDynamicPayloadSize())
+	radio.stopListening()
+	radio.write(receivedMessage)
+	radio.startListening()
+	# translating message
+	arr = []
+	for n in receivedMessage:
+		# Decode into standard unicode set
+		if (n >= 32 and n <= 126):
+			arr.append(chr(n))
+	# setting pins off
+	for pin in PINS:
+		if not GPIO.input(pin):
+			GPIO.output(pin, GPIO.HIGH)
+	# setting correct GPIO
+	if len(arr) > 0:
+		if arr[1] == '1':
+			GPIO.output(int(arr[0]), GPIO.LOW)
+			secs = int("".join(arr)[2:])
+			# timer
+			if isTimerActive:
+				t.cancel()
+				isTimerActive = False
+			t = Timer(secs, pinOff, [int(arr[0])])
+			t.start()
+			isTimerActive = True
+		else:
+			GPIO.output(int(arr[0]), GPIO.HIGH)
